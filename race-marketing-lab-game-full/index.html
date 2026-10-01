@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Race Marketing Lab — Career Mode</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="startScreen" class="screen start-screen">
+  <div class="start-bg"></div>
+  <div class="start-content">
+    <div class="logo-lockup"><span>RML</span><div><b>RACE MARKETING LAB</b><small>CAREER MODE</small></div></div>
+    <p class="kicker">MOTORSPORT • MARKETING • STRATEGY</p>
+    <h1>Construa uma marca.<br>Conquiste o paddock.<br><em>Vença fora da pista.</em></h1>
+    <p class="intro">Você acaba de assumir o marketing da Volt Racing. Cada decisão afeta orçamento, fãs, imprensa, patrocinadores e o futuro da equipe.</p>
+    <button id="newGameBtn" class="primary big">INICIAR NOVA TEMPORADA</button>
+    <button id="howBtn" class="ghost">COMO JOGAR</button>
+  </div>
+  <div class="start-footer">Season 01 • Projeto demonstrativo de marketing & tecnologia</div>
+</div>
+
+<div id="creatorScreen" class="screen creator-screen hidden">
+  <div class="creator-card">
+    <div class="creator-copy">
+      <span class="eyebrow">CRIAÇÃO DE PERSONAGEM</span>
+      <h2>Quem vai liderar o marketing da Volt Racing?</h2>
+      <p>Escolha nome, aparência e especialidade. Sua especialidade concede um bônus durante a temporada.</p>
+      <label>Nome<input id="playerName" maxlength="18" value="Rita"></label>
+      <div class="field-group"><span>Especialidade</span>
+        <div class="spec-grid">
+          <button class="spec selected" data-spec="story"><b>Storytelling</b><small>+10% fãs em campanhas</small></button>
+          <button class="spec" data-spec="deal"><b>Patrocínios</b><small>+10% valor de contratos</small></button>
+          <button class="spec" data-spec="data"><b>Data & Growth</b><small>+10% Sponsor Score</small></button>
+        </div>
+      </div>
+      <div class="field-group"><span>Visual</span>
+        <div class="avatar-options">
+          <button class="avatar selected" data-look="0">A</button><button class="avatar" data-look="1">B</button><button class="avatar" data-look="2">C</button><button class="avatar" data-look="3">D</button>
+        </div>
+      </div>
+      <button id="startCareerBtn" class="primary">ENTRAR NO PADDOCK</button>
+    </div>
+    <div class="creator-preview"><canvas id="preview" width="360" height="440"></canvas><div class="preview-caption">MARKETING DIRECTOR • VOLT RACING</div></div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">RML</span><div><strong>RACE MARKETING LAB</strong><small id="seasonLabel">CAREER MODE • SEASON 01</small></div></div>
+    <div class="hud">
+      <div><small>ORÇAMENTO</small><strong id="budgetHud">R$ 42.500</strong></div>
+      <div><small>REPUTAÇÃO</small><strong id="repHud">62</strong></div>
+      <div><small>FÃS</small><strong id="fansHud">124K</strong></div>
+      <div><small>SPONSOR SCORE</small><strong id="sponsorHud">48</strong></div>
+    </div>
+  </header>
+
+  <main class="game-shell">
+    <section class="game-stage-wrap">
+      <canvas id="game" width="1280" height="720" aria-label="Jogo Race Marketing Lab"></canvas>
+      <div class="controls-hint">WASD / SETAS • E interagir • M celular • T tabela • ESC fechar</div>
+      <div id="toast" class="toast" aria-live="polite"></div>
+      <div id="objectiveCard" class="objective-card">
+        <span class="eyebrow">MISSÃO ATUAL</span><strong id="objectiveTitle"></strong><p id="objectiveText"></p><div class="progress"><span id="objectiveProgress"></span></div>
+      </div>
+      <div class="stage-tag"><span id="circuitTag">NOVA AURORA</span><b id="dayTag">SEXTA • 14:32</b></div>
+    </section>
+
+    <aside class="side-panel">
+      <div class="panel-card season-card"><span class="eyebrow">TEMPORADA 01</span><h2 id="roundTitle">Etapa 1/3</h2><p id="roundName">Autódromo Nova Aurora</p><div id="weekendDays" class="race-weekend"></div></div>
+      <div class="panel-card"><span class="eyebrow">STATUS</span><div class="stat-row"><span>Humor da equipe</span><b id="teamMood">Bom</b></div><div class="stat-row"><span>Pressão da mídia</span><b id="mediaPressure">Baixa</b></div><div class="stat-row"><span>Patrocinadores</span><b id="activeSponsors">2/5</b></div><div class="stat-row"><span>Nível</span><b id="levelHud">1</b></div></div>
+      <div class="panel-card"><span class="eyebrow">ATALHOS</span><button id="openPhone" class="side-btn">Abrir celular <kbd>M</kbd></button><button id="openStandings" class="side-btn">Classificação <kbd>T</kbd></button><button id="openCareer" class="side-btn">Carreira & XP</button></div>
+    </aside>
+  </main>
+</div>
+
+<div id="dialogModal" class="modal hidden" role="dialog" aria-modal="true"><div class="dialog-card"><canvas class="portrait-canvas" id="dialogPortrait" width="190" height="300"></canvas><div class="dialog-content"><span class="eyebrow" id="dialogRole"></span><h3 id="dialogName"></h3><p id="dialogText"></p><div id="dialogChoices" class="choice-list"></div></div></div></div>
+<div id="phoneModal" class="modal hidden"><div class="phone-shell"><div class="phone-top"><div><strong>VOLT // MOBILE</strong><small id="phoneOwner"></small></div><button class="icon-btn" data-close="phoneModal">✕</button></div><div class="phone-grid"><button class="app-icon" data-app="social"><span>◎</span>Social</button><button class="app-icon" data-app="mail"><span>✉</span>Inbox</button><button class="app-icon" data-app="metrics"><span>▥</span>Métricas</button><button class="app-icon" data-app="sponsors"><span>◆</span>Sponsors</button><button class="app-icon" data-app="calendar"><span>▦</span>Agenda</button><button class="app-icon" data-app="missions"><span>★</span>Missões</button></div><div id="phoneContent" class="phone-content"><div class="empty-state">Escolha um aplicativo.</div></div></div></div>
+<div id="standingsModal" class="modal hidden"><div class="sheet wide"><div class="sheet-head"><div><span class="eyebrow">SEASON 01</span><h3>Brand Championship</h3></div><button class="icon-btn" data-close="standingsModal">✕</button></div><p class="muted">Pontuação combina reputação, crescimento de fãs, valor de mídia e satisfação dos patrocinadores.</p><div id="standingsTable" class="standings"></div></div></div>
+<div id="careerModal" class="modal hidden"><div class="sheet"><div class="sheet-head"><div><span class="eyebrow">CAREER MODE</span><h3 id="careerName">Marketing Director</h3></div><button class="icon-btn" data-close="careerModal">✕</button></div><p>XP <span id="xpText"></span></p><div class="progress large"><span id="xpBar"></span></div><div id="perkGrid" class="perk-grid"></div></div></div>
+<div id="briefingModal" class="modal hidden"><div class="briefing-card"><span class="eyebrow">RACE WEEKEND COMPLETE</span><h2 id="briefingTitle"></h2><p id="briefingText"></p><div id="briefingStats" class="briefing-stats"></div><button id="nextRoundBtn" class="primary">VIAJAR PARA PRÓXIMA ETAPA</button></div></div>
+<div id="endingModal" class="modal hidden"><div class="ending-card"><span class="eyebrow">SEASON FINALE</span><h1 id="endingTitle"></h1><p id="endingText"></p><div id="endingSummary" class="briefing-stats"></div><button id="restartBtn" class="primary">JOGAR NOVAMENTE</button></div></div>
+<div id="howModal" class="modal hidden"><div class="sheet"><div class="sheet-head"><h3>Como jogar</h3><button class="icon-btn" data-close="howModal">✕</button></div><p>Explore o paddock, converse com personagens, tome decisões de marketing e cumpra as missões da etapa. Use o celular para campanhas, patrocinadores e métricas. Ao concluir os objetivos, a temporada avança.</p><div class="how-grid"><div><b>WASD / Setas</b><span>Movimentação</span></div><div><b>E</b><span>Interagir</span></div><div><b>M</b><span>Celular</span></div><div><b>T</b><span>Classificação</span></div></div></div></div>
+
+<script src="script.js"></script>
+</body></html>
