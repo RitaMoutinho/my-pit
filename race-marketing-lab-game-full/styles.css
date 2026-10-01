@@ -13,7 +13,7 @@
   --primary-soft:#eef3ff;
   --success:#22c55e;
   --success-soft:#ecfdf3;
-  --violet:#7c5cff;
+  --violet:#e8559d;
   --gold:#f0b429;
   --danger:#ef4444;
   --shadow-sm:0 8px 24px rgba(15,23,40,.06);
@@ -132,7 +132,7 @@ img{display:block;max-width:100%}
 }
 .kpi-icon{width:42px;height:42px;border-radius:14px}
 .accent-blue{background:#eef3ff;color:var(--primary)}
-.accent-violet{background:#f4eeff;color:var(--violet)}
+.accent-violet{background:#fdeef6;color:var(--violet)}
 .accent-gold{background:#fff7e8;color:#c98a00}
 .mission-card small{display:block;color:var(--primary);font-weight:800;letter-spacing:.12em;margin-bottom:4px}
 .mission-card strong{display:block;font-size:1.08rem;letter-spacing:-.02em;margin-bottom:4px}
