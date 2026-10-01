@@ -21,20 +21,18 @@ const dailyQuestions=[
   {q:'Um patrocinador marcou a equipe em um post. Como aproveitar o momento?',lead:'Pense em relacionamento, não só em visibilidade.',scenario:'A marca parceira publicou algo espontâneo marcando a equipe, sem ter sido combinado antes.',answers:[['A','Ignorar, já que não foi planejado pela equipe','Perde a chance de fortalecer a parceria'],['B','Reagir rápido, compartilhar e agradecer publicamente','Fortalece o relacionamento e amplia o alcance do post'],['C','Pedir pra marca apagar e fazer um post mais formal depois','Desperdiça a espontaneidade, que costuma performar melhor']],correct:1,explanation:'Reagir rápido e publicamente a uma menção espontânea do patrocinador reforça a parceria e aproveita o alcance orgânico dela.',tip:'Menções espontâneas de parceiros valem mais quando respondidas na hora.',impact:[['Valor percebido pelo sponsor','Maior'],['Alcance combinado','+15%']]},
   {q:'Seu Reels teve alcance alto e poucos comentários. O que testar agora?',lead:'O alcance já está bom — o próximo passo é gerar conversa.',scenario:'O vídeo circulou bastante, mas quase ninguém comentou ou fez perguntas.',answers:[['A','Postar o mesmo vídeo de novo em outro horário','Não resolve a falta de interação'],['B','Fazer uma continuação com uma pergunta direta pra audiência responder','Transforma alcance em conversa real'],['C','Parar de fazer Reels e voltar só pra posts estáticos','Abandona o formato que já está performando bem em alcance']],correct:1,explanation:'Quando o alcance já é bom, o próximo passo é puxar interação com uma pergunta clara, não abandonar o formato.',tip:'Alcance alto + pergunta direta costuma ser a combinação que gera mais comentários.',impact:[['Comentários esperados','+30%'],['Alcance','Mantido']]}
 ];
-const state={screen:'homeScreen',xp:320,streak:12,lives:5,reputation:78,followers:124000,sponsor:3,currentModule:2,currentQuestion:0,selected:null,correctCount:0,completed:new Set([0,1]),unlocked:new Set([0,1,2]),dailyMode:false};
+const state={screen:'homeScreen',xp:320,streak:12,reputation:78,followers:124000,sponsor:3,currentModule:2,currentQuestion:0,selected:null,correctCount:0,completed:new Set([0,1]),unlocked:new Set([0,1,2]),dailyMode:false};
 let currentDaily=null;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const screens=$$('.screen'),navItems=$$('.nav-item[data-screen]'),toast=$('#toast');
 function showToast(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove('show'),1900)}
 function showScreen(id){screens.forEach(s=>s.classList.toggle('active',s.id===id));state.screen=id;navItems.forEach(n=>n.classList.toggle('active',n.dataset.screen===id));window.scrollTo({top:0,behavior:'smooth'});}
-function hearts(el){el.textContent='♥ '.repeat(state.lives).trim()+' ♡ '.repeat(Math.max(0,5-state.lives)).trim()}
 function formatFollowers(n){return n>=1000?`${Math.round(n/1000)}K`:n}
 function updateStats(){
-  $('#xpTop').textContent=state.xp;$('#xpSeason').textContent=state.xp;$('#streak').textContent=state.streak;$('#streakSeason').textContent=state.streak;$('#livesTop').textContent=state.lives;
+  $('#xpTop').textContent=state.xp;$('#xpSeason').textContent=state.xp;$('#streak').textContent=state.streak;$('#streakSeason').textContent=state.streak;
   $('#homeRep').textContent=state.reputation;$('#profileRep').textContent=state.reputation;$('#homeFollowers').textContent=formatFollowers(state.followers);$('#profileFollowers').textContent=formatFollowers(state.followers);$('#homeSponsor').textContent=`${state.sponsor}/5`;$('#profileSponsor').textContent=`${state.sponsor}/5`;
   const lvl=state.xp<500?3:state.xp<800?4:5;const floor=lvl===3?0:lvl===4?500:800;const ceil=lvl===3?500:lvl===4?800:1200;const pct=Math.max(0,Math.min(100,((state.xp-floor)/(ceil-floor))*100));
   $('#profileLevel').textContent=`Nível ${lvl}`;$('#levelTitle').textContent=`Nível ${lvl} — ${lvl===3?'Estrategista':lvl===4?'Head de Growth':'Diretora de Marketing'}`;$('#xpProfileText').textContent=`${state.xp} / ${ceil} XP`;$('#xpProfileBar').style.width=`${pct}%`;
-  hearts($('#hearts'));hearts($('#resultHearts'));
 }
 function renderPath(){
   const path=$('#learningPath');path.innerHTML='';
@@ -58,15 +56,15 @@ function renderQuestion(){
   const q=state.dailyMode?currentDaily:modules[state.currentModule].questions[state.currentQuestion];if(!q)return;
   const m=state.dailyMode?null:modules[state.currentModule];
   $('#quizCategory').textContent=state.dailyMode?'DESAFIO RÁPIDO':(m.category||m.title.toUpperCase());$('#quizNumber').textContent=state.dailyMode?'':'1.';$('#quizQuestion').textContent=q.q;$('#quizLead').textContent=q.lead;$('#scenarioText').textContent=q.scenario;
-  $('#questionCounter').textContent=state.dailyMode?'1/1':`${state.currentQuestion+1}/${m.questions.length}`;$('#quizProgress').style.width=state.dailyMode?'100%':`${((state.currentQuestion+1)/m.questions.length)*100}%`;hearts($('#hearts'));
+  $('#questionCounter').textContent=state.dailyMode?'1/1':`${state.currentQuestion+1}/${m.questions.length}`;$('#quizProgress').style.width=state.dailyMode?'100%':`${((state.currentQuestion+1)/m.questions.length)*100}%`;
   const ans=$('#answers');ans.innerHTML='';q.answers.forEach((a,i)=>{const b=document.createElement('button');b.className='answer';b.dataset.index=i;b.innerHTML=`<span class="letter">${a[0]}</span><div><strong>${a[1]}</strong><p>${a[2]}</p></div><i></i>`;b.addEventListener('click',()=>{$$('.answer').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');state.selected=i;$('#continueQuiz').disabled=false});ans.appendChild(b)});$('#continueQuiz').disabled=true;state.selected=null;
 }
 function gradeQuestion(){
   const q=state.dailyMode?currentDaily:modules[state.currentModule].questions[state.currentQuestion];
   const m=state.dailyMode?null:modules[state.currentModule];
   const ok=state.selected===q.correct;
-  if(ok){state.correctCount++;state.xp+=state.dailyMode?20:30;state.reputation+=1;state.followers+=900;if(state.dailyMode)state.streak+=1;}else{state.lives=Math.max(0,state.lives-1);}
-  $('#resultProgress').style.width=state.dailyMode?'100%':`${((state.currentQuestion+1)/m.questions.length)*100}%`;$('#resultCounter').textContent=state.dailyMode?'1/1':`${state.currentQuestion+1}/${m.questions.length}`;hearts($('#resultHearts'));
+  if(ok){state.correctCount++;state.xp+=state.dailyMode?20:30;state.reputation+=1;state.followers+=900;if(state.dailyMode)state.streak+=1;}
+  $('#resultProgress').style.width=state.dailyMode?'100%':`${((state.currentQuestion+1)/m.questions.length)*100}%`;$('#resultCounter').textContent=state.dailyMode?'1/1':`${state.currentQuestion+1}/${m.questions.length}`;
   $('#resultIcon').textContent=ok?'✓':'×';$('#resultIcon').classList.toggle('bad',!ok);$('#resultTitle').textContent=ok?'CORRETO!':'QUASE!';$('#resultTitle').classList.toggle('bad',!ok);$('#resultSubtitle').textContent=ok?'Boa leitura de cenário.':'Veja o raciocínio mais estratégico.';$('#resultExplanation').textContent=q.explanation;$('#resultTip').textContent=q.tip;
   $('#impactGrid').innerHTML=q.impact.map(x=>`<div class="impact-card"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('');
   $('#nextQuestion').textContent=state.dailyMode?'CONCLUIR':(state.currentQuestion===m.questions.length-1?'VER RESULTADO':'PRÓXIMA');updateStats();showScreen('resultScreen');
@@ -86,6 +84,6 @@ function renderAchievements(){
 }
 $$('[data-screen]').forEach(btn=>btn.addEventListener('click',()=>{showScreen(btn.dataset.screen);closeDrawer()}));$$('[data-back]').forEach(btn=>btn.addEventListener('click',()=>{state.dailyMode=false;showScreen('homeScreen')}));$('#missionBtn').addEventListener('click',()=>startModule(2));$('#dailyBtn').addEventListener('click',startDaily);$('#continueQuiz').addEventListener('click',gradeQuestion);$('#nextQuestion').addEventListener('click',nextQuestion);$('#finishModuleBtn').addEventListener('click',()=>showScreen('homeScreen'));$('#profileBtn').addEventListener('click',()=>showScreen('profileScreen'));
 const drawer=$('#drawer'),scrim=$('#scrim');function openDrawer(){if(window.innerWidth>=980)return;drawer.classList.add('open');scrim.classList.add('show');drawer.setAttribute('aria-hidden','false')}function closeDrawer(){drawer.classList.remove('open');scrim.classList.remove('show');drawer.setAttribute('aria-hidden','true')}$('#menuBtn').addEventListener('click',openDrawer);$('#closeDrawer').addEventListener('click',closeDrawer);scrim.addEventListener('click',closeDrawer);
-$('#resetBtn').addEventListener('click',()=>{state.xp=320;state.streak=12;state.lives=5;state.reputation=78;state.followers=124000;state.sponsor=3;state.currentModule=2;state.currentQuestion=0;state.selected=null;state.correctCount=0;state.completed=new Set([0,1]);state.unlocked=new Set([0,1,2]);renderAll();showScreen('homeScreen');showToast('Demonstração reiniciada.');closeDrawer()});
+$('#resetBtn').addEventListener('click',()=>{state.xp=320;state.streak=12;state.reputation=78;state.followers=124000;state.sponsor=3;state.currentModule=2;state.currentQuestion=0;state.selected=null;state.correctCount=0;state.completed=new Set([0,1]);state.unlocked=new Set([0,1,2]);renderAll();showScreen('homeScreen');showToast('Demonstração reiniciada.');closeDrawer()});
 function renderAll(){renderPath();renderSeason();renderAchievements();updateStats()}
 renderAll();
