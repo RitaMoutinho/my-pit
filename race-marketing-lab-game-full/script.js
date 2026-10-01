@@ -13,7 +13,7 @@ const modules=[
   {title:'Análise de dados',icon:'query_stats',xp:130,questions:[],category:'DADOS'},
   {title:'Planejamento de campanha',icon:'chess',xp:160,questions:[],category:'CAMPANHAS'}
 ];
-const races=[['01','XANGAI','Shanghai International Circuit','done'],['02','JEDDAH','Jeddah Corniche Circuit','done'],['03','MONTREAL','Circuit Gilles-Villeneuve','active'],['04','SILVERSTONE','Silverstone Circuit','locked'],['05','ZANDVOORT','Circuit Zandvoort','locked'],['06','AUSTIN','Circuit of The Americas','locked'],['07','LAS VEGAS','Las Vegas Strip Circuit','locked']];
+const races=[['01','XANGAI','Shanghai International Circuit','done'],['02','MONTREAL','Circuit Gilles-Villeneuve','done'],['03','SILVERSTONE','Silverstone Circuit','active'],['04','ZANDVOORT','Circuit Zandvoort','locked'],['05','AUSTIN','Circuit of The Americas','locked'],['06','LAS VEGAS','Las Vegas Strip Circuit','locked']];
 const achievements=[['campaign','Primeira campanha','Publique sua primeira ação','unlocked'],['groups','+10K seguidores','Cresça a comunidade','unlocked'],['handshake','Primeiro patrocinador','Feche seu primeiro acordo','unlocked'],['movie','Especialista em conteúdo','Conclua o Módulo 03','locked'],['mic_external_on','Media Ready','Conclua Mídia e imprensa','locked'],['shield','Gestão de crise','Resolva uma crise','locked'],['query_stats','Data Driven','Conclua Análise de dados','locked'],['emoji_events','Diretora de Marketing','Finalize a temporada','locked']];
 
 const dailyQuestions=[
