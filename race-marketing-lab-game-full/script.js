@@ -22,7 +22,7 @@ const modules=[
   ]}
 ];
 
-const races=[['01','BAHRAIN','Sakhir International Circuit','done'],['02','JEDDAH','Jeddah Corniche Circuit','done'],['03','NOVA AURORA 🇧🇷','Autódromo de Nova Aurora','active'],['04','MIAMI','Miami International Autodrome','locked'],['05','IMOLA','Autodromo Enzo e Dino Ferrari','locked'],['06','MÔNACO','Circuit de Monaco','locked'],['07','BARCELONA','Circuit de Barcelona-Catalunya','locked'],['08','SILVERSTONE','Silverstone Circuit','locked']];
+const races=[['01','BAHRAIN','Sakhir International Circuit','done'],['02','JEDDAH','Jeddah Corniche Circuit','done'],['03','MELBOURNE 🇦🇺','Albert Park Circuit','active'],['04','MIAMI','Miami International Autodrome','locked'],['05','IMOLA','Autodromo Enzo e Dino Ferrari','locked'],['06','MÔNACO','Circuit de Monaco','locked'],['07','BARCELONA','Circuit de Barcelona-Catalunya','locked'],['08','SILVERSTONE','Silverstone Circuit','locked']];
 const achievements=[['📣','Primeira campanha','Publique sua primeira ação','unlocked'],['▥','+10K seguidores','Cresça a comunidade','unlocked'],['🤝','Primeiro patrocinador','Feche seu primeiro acordo','unlocked'],['🎬','Especialista em conteúdo','Conclua o Módulo 03','locked'],['🎤','Media Ready','Conclua Mídia e imprensa','locked'],['🛡️','Gestão de crise','Resolva uma crise','locked'],['📊','Data Driven','Conclua Análise de dados','locked'],['🏆','Diretora de Marketing','Finalize a temporada','locked']];
 
 const state={screen:'homeScreen',xp:320,streak:12,lives:5,reputation:78,followers:124000,sponsor:3,currentModule:2,currentQuestion:0,selected:null,correctCount:0,completed:new Set([0,1]),unlocked:new Set([0,1,2])};
