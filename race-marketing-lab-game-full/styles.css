@@ -58,7 +58,7 @@ img{display:block;max-width:100%}
   padding:20px 16px 110px;
   position:relative;
 }
-.topbar,.card-shell,.hero-card,.mission-card,.home-kpis>div,.lesson,.daily-card,.season-summary,.race,.achievement-hero,.achievement,.profile-hero,.xp-card,.stats-grid>div,.drawer,.top-stats span,.bottom-nav,.icon-btn,.avatar-btn{
+.topbar,.card-shell,.hero-card,.mission-card,.learning-path,.daily-card,.season-summary,.race,.achievement-hero,.achievement,.profile-hero,.xp-card,.stats-grid>div,.drawer,.top-stats span,.bottom-nav,.icon-btn,.avatar-btn{
   background:var(--surface);
   border:1px solid var(--line);
   box-shadow:var(--shadow-sm);
@@ -127,41 +127,47 @@ img{display:block;max-width:100%}
   border-radius:24px;padding:18px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;text-align:left;transition:.2s ease
 }
 .mission-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
-.mission-icon,.kpi-icon{
+.mission-icon{
   width:48px;height:48px;border-radius:16px;display:inline-flex;align-items:center;justify-content:center;background:var(--primary-soft);color:var(--primary)
 }
-.kpi-icon{width:42px;height:42px;border-radius:14px}
-.accent-blue{background:#eef3ff;color:var(--primary)}
-.accent-violet{background:#fdeef6;color:var(--violet)}
-.accent-gold{background:#fff7e8;color:#c98a00}
 .mission-card small{display:block;color:var(--primary);font-weight:800;letter-spacing:.12em;margin-bottom:4px}
 .mission-card strong{display:block;font-size:1.08rem;letter-spacing:-.02em;margin-bottom:4px}
 .mission-card span:not(.arrow){display:block;color:var(--muted)}
 .arrow{color:#92a1b1;display:inline-flex;align-items:center;justify-content:center}
-.home-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.home-kpis>div{padding:18px;border-radius:22px;display:grid;gap:8px}
-.home-kpis small{color:var(--muted);font-weight:700}
-.home-kpis strong{font-family:"Archivo","DM Sans",sans-serif;font-size:1.45rem;letter-spacing:-.04em}
+
+/* Telemetry strip: one readout panel instead of three identical KPI cards —
+   the single moment of high contrast on the page, like a live timing board. */
+.telemetry-strip{display:flex;background:linear-gradient(135deg,#131926,#1d2636);border-radius:16px;overflow:hidden}
+.telemetry-strip>div{flex:1;padding:16px 20px;position:relative}
+.telemetry-strip>div+div:before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:rgba(255,255,255,.14)}
+.telemetry-strip small{display:block;color:rgba(234,238,245,.6);font-weight:700;font-size:.72rem;letter-spacing:.04em;margin-bottom:6px}
+.telemetry-strip strong{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:1.3rem;font-weight:700;color:#fff;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+
 .section-head,.page-head{display:flex;align-items:end;justify-content:space-between;gap:12px}
 .section-head h2,.page-head h2,.subhead{margin:0;font-family:"Archivo","DM Sans",sans-serif;font-size:1.72rem;letter-spacing:-.04em}
-.learning-path{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+
+/* Learning path: a connected ladder (season progress), not a grid of identical
+   cards — the vertical line is the throughline of the career, module by module. */
+.learning-path{display:flex;flex-direction:column;padding:4px 18px}
 .lesson{
-  width:100%;padding:18px;border-radius:24px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;text-align:left;transition:.18s ease
+  width:100%;padding:16px 0;display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:center;text-align:left;position:relative;background:none;border:0;box-shadow:none;border-radius:0;transition:none
 }
-.lesson:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.lesson:not(:last-child):after{content:"";position:absolute;left:19px;top:48px;bottom:-16px;width:2px;background:var(--line-2)}
+.lesson.completed:not(:last-child):after{background:var(--success)}
+.lesson:not(:last-child){border-bottom:1px solid var(--line)}
 .lesson .node{
-  width:50px;height:50px;border-radius:16px;background:#f4f7fb;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;color:var(--primary)
+  width:40px;height:40px;border-radius:50%;background:var(--surface-2);border:2px solid var(--line-2);display:inline-flex;align-items:center;justify-content:center;color:var(--muted-2);font-size:1.1rem;position:relative;z-index:1
 }
-.lesson small{display:block;color:var(--muted-2);font-weight:800;letter-spacing:.06em;margin-bottom:4px}
+.lesson small{display:block;color:var(--muted-2);font-weight:800;letter-spacing:.06em;margin-bottom:4px;font-size:.72rem}
 .lesson strong{display:block;font-size:1.03rem;letter-spacing:-.02em;margin-bottom:4px}
 .lesson div span{display:block;color:var(--muted);font-size:.92rem}
 .lesson>b{color:#a7b3c1;font-size:1.2rem}
-.lesson.completed .node{background:var(--success-soft);border-color:#c8f0d5;color:var(--success)}
+.lesson.completed .node{background:var(--success);border-color:var(--success);color:#fff}
 .lesson.completed div span{color:#16a34a}
-.lesson.current{border-color:#bdd0ff;box-shadow:0 0 0 4px rgba(47,103,255,.08),var(--shadow-sm)}
-.lesson.current .node{background:var(--primary-soft);color:var(--primary)}
-.lesson.locked{opacity:.58}
-.lesson.boss{background:linear-gradient(180deg,#fff,#fafbff)}
+.lesson.current .node{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 0 0 5px var(--primary-soft)}
+.lesson.current strong{color:var(--primary)}
+.lesson.locked{opacity:.5}
+.lesson:hover:not(.locked) strong{color:var(--primary)}
 .daily-card{
   display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px;border-radius:26px
 }
@@ -289,7 +295,10 @@ img{display:block;max-width:100%}
   .hero-card{grid-template-columns:1fr}
   .hero-copy{padding:4px}
   .hero-visual{min-height:220px}
-  .hero-meta,.home-kpis,.learning-path,.impact-grid,.reward-row,.achievements,.stats-grid{grid-template-columns:1fr}
+  .hero-meta,.impact-grid,.reward-row,.achievements,.stats-grid{grid-template-columns:1fr}
+  .telemetry-strip{flex-direction:column}
+  .telemetry-strip>div+div:before{display:none}
+  .telemetry-strip>div:not(:last-child){border-bottom:1px solid rgba(255,255,255,.1)}
   .daily-card{flex-direction:column;align-items:stretch}
   .xp-row,.section-head,.page-head,.season-summary>div:first-child{flex-direction:column;align-items:flex-start}
   .quiz-content,.result-content,.complete-wrap{padding:18px}
