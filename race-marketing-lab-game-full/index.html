@@ -3,68 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#081118" />
+  <meta name="theme-color" content="#eef2f7" />
   <title>Race Marketing Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=DM+Sans:wght@400;500;600;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,1,0" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main class="app-shell" id="app">
     <header class="topbar">
-      <button class="icon-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
-      <button class="brand" data-screen="homeScreen" aria-label="Race Marketing Lab - início">
-        <span class="brand-mark">//</span>
-        <div><strong>RACE</strong><span>MARKETING LAB</span></div>
-      </button>
-      <div class="top-stats">
-        <span title="Sequência">🔥 <b id="streak">12</b></span>
-        <span title="XP">◆ <b id="xpTop">320</b></span>
-        <span title="Vidas" class="lives"><b id="livesTop">5</b> ♥</span>
+      <div class="topbar-left">
+        <button class="icon-btn" id="menuBtn" aria-label="Abrir menu"><span class="msym">menu</span></button>
+        <button class="brand" data-screen="homeScreen" aria-label="Race Marketing Lab - início">
+          <span class="brand-mark"></span>
+          <div>
+            <strong>RACE</strong>
+            <span>MARKETING LAB</span>
+          </div>
+        </button>
       </div>
-      <button class="avatar-btn" id="profileBtn" aria-label="Abrir perfil"><span>👤</span><i></i></button>
+
+      <div class="top-stats">
+        <span><i>🔥</i><b id="streak">12</b></span>
+        <span><i>◆</i><b id="xpTop">320</b></span>
+        <span class="lives"><i>♥</i><b id="livesTop">5</b></span>
+      </div>
+
+      <button class="avatar-btn" id="profileBtn" aria-label="Abrir perfil"><span>MR</span><i></i></button>
     </header>
 
     <section class="screen active" id="homeScreen">
       <section class="hero-card">
         <div class="hero-copy">
-          <div class="hero-topline"><p class="eyebrow">TEMPORADA 01</p><span class="stage-pill" id="stagePill">ETAPA 03/10</span></div>
+          <div class="hero-topline">
+            <p class="eyebrow">TEMPORADA 01</p>
+            <span class="stage-pill" id="stagePill">ETAPA 03/10</span>
+          </div>
           <h1>MELBOURNE</h1>
-          <p class="location">🇦🇺 Albert Park Circuit</p>
+          <p class="location">AU Albert Park Circuit</p>
           <div class="progress"><span id="seasonProgress" style="width:30%"></span></div>
+
+          <div class="hero-meta">
+            <div class="mini-card">
+              <small>EQUIPE</small>
+              <strong>Volt Racing</strong>
+            </div>
+            <div class="mini-card">
+              <small>FOCO DA ETAPA</small>
+              <strong>Conteúdo e fãs</strong>
+            </div>
+          </div>
         </div>
+
         <div class="hero-visual" aria-hidden="true">
-          <div class="garage-sign">VOLT RACING</div>
+          <img src="assets/hero-melbourne.png" alt="Carro de corrida em Melbourne" />
+          <div class="hero-visual-badge">VOLT RACING</div>
         </div>
       </section>
 
       <button class="mission-card" id="missionBtn">
-        <div class="mission-icon">🏁</div>
-        <div><small>MISSÃO DA ETAPA</small><strong>Crie conteúdo que conecte fãs e equipe</strong><span>Complete o Módulo 03 e alcance 400 XP.</span></div>
-        <span class="arrow">→</span>
+        <div class="mission-icon"><span class="msym">flag</span></div>
+        <div>
+          <small>MISSÃO DA ETAPA</small>
+          <strong>Crie conteúdo que conecte fãs e equipe</strong>
+          <span>Complete o Módulo 03 e alcance 400 XP.</span>
+        </div>
+        <span class="arrow"><span class="msym">arrow_forward</span></span>
       </button>
 
       <div class="home-kpis">
-        <div><span>★</span><small>Reputação</small><strong id="homeRep">78</strong></div>
-        <div><span>👥</span><small>Seguidores</small><strong id="homeFollowers">124K</strong></div>
-        <div><span>🤝</span><small>Sponsor Score</small><strong id="homeSponsor">3/5</strong></div>
+        <div>
+          <span class="kpi-icon accent-blue"><span class="msym">workspace_premium</span></span>
+          <small>Reputação</small>
+          <strong id="homeRep">78</strong>
+        </div>
+        <div>
+          <span class="kpi-icon accent-violet"><span class="msym">groups</span></span>
+          <small>Seguidores</small>
+          <strong id="homeFollowers">124K</strong>
+        </div>
+        <div>
+          <span class="kpi-icon accent-gold"><span class="msym">handshake</span></span>
+          <small>Sponsor Score</small>
+          <strong id="homeSponsor">3/5</strong>
+        </div>
       </div>
 
-      <div class="section-head"><div><p class="eyebrow">TRILHA PRINCIPAL</p><h2>Construa sua carreira</h2></div><span class="soft-badge" id="moduleCount">7 módulos</span></div>
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">TRILHA PRINCIPAL</p>
+          <h2>Construa sua carreira</h2>
+        </div>
+        <span class="soft-badge" id="moduleCount">7 módulos</span>
+      </div>
       <div class="learning-path" id="learningPath"></div>
 
       <section class="daily-card">
-        <div><p class="eyebrow">DESAFIO RÁPIDO</p><h3>Briefing de 60 segundos</h3><p>Uma decisão curta para manter sua sequência ativa.</p></div>
+        <div>
+          <p class="eyebrow">DESAFIO RÁPIDO</p>
+          <h3>Briefing de 60 segundos</h3>
+          <p>Uma decisão curta para manter sua sequência ativa.</p>
+        </div>
         <button id="dailyBtn">JOGAR +20 XP</button>
       </section>
     </section>
 
     <section class="screen" id="quizScreen">
       <div class="quiz-top">
-        <button class="back-btn" data-back>←</button>
+        <button class="icon-btn back-btn" data-back aria-label="Voltar"><span class="msym">arrow_back</span></button>
         <div class="quiz-progress"><span id="quizProgress"></span></div>
         <span class="counter" id="questionCounter">1/5</span>
         <div class="hearts" id="hearts"></div>
       </div>
-      <div class="quiz-content">
+      <div class="quiz-content card-shell">
         <p class="eyebrow" id="quizCategory">REDES SOCIAIS E CONTEÚDO</p>
         <h2><span class="qnum" id="quizNumber">1.</span> <span id="quizQuestion">Pergunta</span></h2>
         <p class="lead" id="quizLead">Escolha a melhor alternativa.</p>
@@ -76,70 +128,105 @@
 
     <section class="screen" id="resultScreen">
       <div class="quiz-top">
-        <button class="back-btn" data-back>←</button>
+        <button class="icon-btn back-btn" data-back aria-label="Voltar"><span class="msym">arrow_back</span></button>
         <div class="quiz-progress"><span id="resultProgress"></span></div>
         <span class="counter" id="resultCounter"></span>
         <div class="hearts" id="resultHearts"></div>
       </div>
-      <div class="result-content">
+      <div class="result-content card-shell">
         <div class="result-icon" id="resultIcon">✓</div>
         <p class="eyebrow" id="resultEyebrow">DECISÃO ANALISADA</p>
         <h2 id="resultTitle">CORRETO!</h2>
         <h3 id="resultSubtitle">Boa leitura de cenário.</h3>
         <p id="resultExplanation"></p>
         <div class="impact-grid" id="impactGrid"></div>
-        <div class="tip-card"><span>💡</span><div><strong>INSIGHT</strong><p id="resultTip"></p></div></div>
+        <div class="tip-card">
+          <span class="msym">lightbulb</span>
+          <div><strong>INSIGHT</strong><p id="resultTip"></p></div>
+        </div>
         <button class="primary-btn" id="nextQuestion">PRÓXIMA</button>
       </div>
     </section>
 
     <section class="screen" id="moduleCompleteScreen">
-      <div class="complete-wrap">
-        <div class="trophy-orbit"><span>🏆</span></div>
+      <div class="complete-wrap card-shell">
+        <div class="trophy-orbit"><span class="msym">military_tech</span></div>
         <p class="eyebrow">MÓDULO CONCLUÍDO</p>
         <h2 id="completeTitle">Redes sociais e conteúdo</h2>
         <p id="completeCopy">Você concluiu todos os desafios deste módulo.</p>
         <div class="score-ring"><div><strong id="completeScore">5/5</strong><span>acertos</span></div></div>
-        <div class="reward-row"><div><small>XP GANHO</small><strong id="completeXp">+150</strong></div><div><small>REPUTAÇÃO</small><strong id="completeRep">+4</strong></div><div><small>NOVA CONQUISTA</small><strong>Desbloqueada</strong></div></div>
+        <div class="reward-row">
+          <div><small>XP GANHO</small><strong id="completeXp">+150</strong></div>
+          <div><small>REPUTAÇÃO</small><strong id="completeRep">+4</strong></div>
+          <div><small>NOVA CONQUISTA</small><strong>Desbloqueada</strong></div>
+        </div>
         <button class="primary-btn" id="finishModuleBtn">VOLTAR PARA A TRILHA</button>
       </div>
     </section>
 
     <section class="screen" id="seasonScreen">
-      <div class="page-head"><div><p class="eyebrow">TEMPORADA 01</p><h2>Calendário</h2></div><div class="inline-stats"><span>🔥 <b id="streakSeason">12</b></span><span>◆ <b id="xpSeason">320</b></span></div></div>
-      <div class="season-summary"><div><small>PROGRESSO</small><strong>3 de 10 etapas</strong></div><div class="progress"><span style="width:30%"></span></div></div>
+      <div class="page-head">
+        <div><p class="eyebrow">TEMPORADA 01</p><h2>Calendário</h2></div>
+        <div class="inline-stats"><span>🔥 <b id="streakSeason">12</b></span><span>◆ <b id="xpSeason">320</b></span></div>
+      </div>
+      <div class="season-summary card-shell">
+        <div><small>PROGRESSO</small><strong>3 de 10 etapas</strong></div>
+        <div class="progress"><span style="width:30%"></span></div>
+      </div>
       <div class="season-list" id="seasonList"></div>
     </section>
 
     <section class="screen" id="achievementsScreen">
       <div class="page-head"><div><p class="eyebrow">CARREIRA</p><h2>Conquistas</h2></div><span class="soft-badge" id="achievementCount">3/8</span></div>
-      <div class="achievement-hero"><span>🏁</span><div><small>PRÓXIMA META</small><strong>Especialista em conteúdo</strong><p>Conclua o Módulo 03 para desbloquear.</p></div></div>
+      <div class="achievement-hero card-shell">
+        <span class="msym">emoji_events</span>
+        <div><small>PRÓXIMA META</small><strong>Especialista em conteúdo</strong><p>Conclua o Módulo 03 para desbloquear.</p></div>
+      </div>
       <div class="achievements" id="achievementsGrid"></div>
     </section>
 
     <section class="screen" id="profileScreen">
-      <div class="profile-hero"><div class="big-avatar">👤</div><div><p class="eyebrow">MEU DESEMPENHO</p><h2>Minha carreira</h2><p>Estrategista de Marketing • <span id="profileLevel">Nível 3</span></p></div></div>
-      <div class="xp-card"><div class="xp-row"><strong id="levelTitle">Nível 3 — Estrategista</strong><span id="xpProfileText">320 / 500 XP</span></div><div class="progress"><span id="xpProfileBar" style="width:64%"></span></div></div>
+      <div class="profile-hero card-shell">
+        <div class="big-avatar">MR</div>
+        <div><p class="eyebrow">MEU DESEMPENHO</p><h2>Marina Ribeiro</h2><p>Estrategista de Marketing • <span id="profileLevel">Nível 3</span></p></div>
+      </div>
+      <div class="xp-card card-shell"><div class="xp-row"><strong id="levelTitle">Nível 3 — Estrategista</strong><span id="xpProfileText">320 / 500 XP</span></div><div class="progress"><span id="xpProfileBar" style="width:64%"></span></div></div>
       <h3 class="subhead">Estatísticas da temporada</h3>
-      <div class="stats-grid"><div><span>★</span><small>Reputação</small><strong id="profileRep">78</strong></div><div><span>👥</span><small>Seguidores</small><strong id="profileFollowers">124K</strong></div><div><span>◉</span><small>Orçamento</small><strong>R$ 42.500</strong></div><div><span>🤝</span><small>Sponsor Score</small><strong id="profileSponsor">3/5</strong></div></div>
+      <div class="stats-grid">
+        <div><span class="msym">workspace_premium</span><small>Reputação</small><strong id="profileRep">78</strong></div>
+        <div><span class="msym">groups</span><small>Seguidores</small><strong id="profileFollowers">124K</strong></div>
+        <div><span class="msym">account_balance_wallet</span><small>Orçamento</small><strong>R$ 42.500</strong></div>
+        <div><span class="msym">handshake</span><small>Sponsor Score</small><strong id="profileSponsor">3/5</strong></div>
+      </div>
       <div class="section-head"><div><p class="eyebrow">SKILLS</p><h2>Competências</h2></div></div>
-      <div class="skills-list"><div><span>Conteúdo</span><div class="progress"><i style="width:72%"></i></div><b>72</b></div><div><span>Patrocínio</span><div class="progress"><i style="width:64%"></i></div><b>64</b></div><div><span>Dados</span><div class="progress"><i style="width:48%"></i></div><b>48</b></div><div><span>Crise</span><div class="progress"><i style="width:31%"></i></div><b>31</b></div></div>
+      <div class="skills-list">
+        <div><span>Conteúdo</span><div class="progress"><i style="width:72%"></i></div><b>72</b></div>
+        <div><span>Patrocínio</span><div class="progress"><i style="width:64%"></i></div><b>64</b></div>
+        <div><span>Dados</span><div class="progress"><i style="width:48%"></i></div><b>48</b></div>
+        <div><span>Crise</span><div class="progress"><i style="width:31%"></i></div><b>31</b></div>
+      </div>
     </section>
 
     <nav class="bottom-nav" aria-label="Navegação principal">
-      <button class="nav-item active" data-screen="homeScreen"><span>⌂</span><small>Início</small></button>
-      <button class="nav-item" data-screen="seasonScreen"><span>▦</span><small>Temporada</small></button>
-      <button class="nav-item" data-screen="achievementsScreen"><span>♜</span><small>Conquistas</small></button>
-      <button class="nav-item" data-screen="profileScreen"><span>●</span><small>Perfil</small></button>
+      <button class="nav-item active" data-screen="homeScreen"><span class="msym">home</span><small>Início</small></button>
+      <button class="nav-item" data-screen="seasonScreen"><span class="msym">calendar_month</span><small>Temporada</small></button>
+      <button class="nav-item" data-screen="achievementsScreen"><span class="msym">trophy</span><small>Conquistas</small></button>
+      <button class="nav-item" data-screen="profileScreen"><span class="msym">person</span><small>Perfil</small></button>
     </nav>
 
     <aside class="drawer" id="drawer" aria-hidden="true">
-      <div class="drawer-head"><strong>RACE MARKETING LAB</strong><button class="icon-btn" id="closeDrawer">×</button></div>
-      <button data-screen="homeScreen">Início</button>
-      <button data-screen="seasonScreen">Temporada</button>
-      <button data-screen="achievementsScreen">Conquistas</button>
-      <button data-screen="profileScreen">Perfil</button>
-      <button id="resetBtn">Reiniciar demonstração</button>
+      <div class="drawer-head">
+        <div class="drawer-brand">
+          <span class="brand-mark"></span>
+          <div><strong>RACE MARKETING LAB</strong><small>Career simulator</small></div>
+        </div>
+        <button class="icon-btn" id="closeDrawer" aria-label="Fechar menu"><span class="msym">close</span></button>
+      </div>
+      <button data-screen="homeScreen"><span class="msym">home</span>Início</button>
+      <button data-screen="seasonScreen"><span class="msym">calendar_month</span>Temporada</button>
+      <button data-screen="achievementsScreen"><span class="msym">trophy</span>Conquistas</button>
+      <button data-screen="profileScreen"><span class="msym">person</span>Perfil</button>
+      <button id="resetBtn"><span class="msym">restart_alt</span>Reiniciar demonstração</button>
     </aside>
     <div class="scrim" id="scrim"></div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
